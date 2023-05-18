@@ -1,0 +1,22 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: api
+    restart: always
+    ports:
+      - 8080:5000
+    networks:
+      - net_A
+
+networks:
+  net_A:
+    external: false
+    name: net_A
+
+volumes:
+  data:
