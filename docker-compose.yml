@@ -1,18 +1,54 @@
 # Use root/example as user/password credentials
 version: '3.1'
 
+
+# zad1 
+
+# services:
+#   api:
+#     build:
+#       context: ./api
+#       dockerfile: Dockerfile
+#     container_name: api
+#     restart: always
+#     ports:
+#       - 8080:5000
+#     networks:
+#       - net_A
+
+# networks:
+#   net_A:
+#     external: false
+#     name: net_A
+
+# volumes:
+#   data:
+
+
+# zad2 
+
+
 services:
   api:
     build:
-      context: ./api
+      context: ./api-express
       dockerfile: Dockerfile
-    container_name: api
+    container_name: api_express
     restart: always
     ports:
-      - 8080:5000
+      - 3000:3000
     networks:
       - net_A
-
+    depends_on:
+      - redis
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    ports:
+      - 6379:6379
+    networks:
+      - net_A
 networks:
   net_A:
     external: false
